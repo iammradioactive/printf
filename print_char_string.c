@@ -10,7 +10,7 @@ int print_str(char *str)
 {
 	int count = 0;
 
-	if (str == NULL)
+	if (str == NULL || *str == '\0')
 		return (0);
 
 	while (*str != '\0')
