@@ -2,40 +2,41 @@
 #include <stddef.h>
 
 /**
- * prnt_str - prints all character in a strig
- * @s: string to be printed
+ * print_str - prints all character in a string
+ * @str: string to be printed
+ * Return: number of characters printed
  */
-int prnt_str(const char *s)
+int print_str(char *str)
 {
 	int count = 0;
 
-	if (*s == '\0')
+	if (str == NULL)
 		return (0);
 
-	while (*s != '\0')
+	while (*str != '\0')
 	{
-		if (s == NULL)
-			return (0);
-		if (*s == '\n')
+		if (*str == '\n')
 		{
 			_putchar('\n');
 		}
 		else
 		{
-			_putchar(*s);
+			_putchar(*str);
 		}
 		count++;
-		s++;
+		str++;
 	}
+
 	return (count);
 }
 
 /**
- * prnt_c - prints a character
+ * print_c - prints a character
  * @c: character to print
+ * Return: always 1
  */
 
-int prnt_c(char c)
+int print_c(int c)
 {
 	_putchar(c);
 	return (1);
