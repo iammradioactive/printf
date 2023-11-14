@@ -1,5 +1,6 @@
 #include "main.h"
-
+#include <stddef.h>
+#include <unistd.h>
 /**
   * _printf - custom printf function
   * @format: format string with specifiers
@@ -11,9 +12,6 @@ int _printf(const char *format, ...)
 	va_list args_list;
 	int print_char = 0;
 
-	if (format == NULL)
-		return (-1);
-
 	va_start(args_list, format);
 
 	while (*format)
@@ -24,26 +22,13 @@ int _printf(const char *format, ...)
 			switch (*format)
 			{
 				case 'c':
-				{
-					char c = (char)va_arg(args_list, int);
-
-					print_char += write(1, &c, 1);
-
+					print_char += prnt_c(va_arg(args_list, int));
 					break;
-				}
 				case 's':
-				{
-					char *str = va_arg(args_list, char *);
-
-					while (*str)
-
-					{
-						print_char += write(1, str++, 1);
-					}
-					break;
-				}
+				print_char += prnt_str(va_arg(args_list, char *));
+				break;
 				case '%':
-				print_char += write(1, "%", 1);
+				print_char += _putchar('%');
 				break;
 				case 'd':
 				print_char += print_d(args_list);
