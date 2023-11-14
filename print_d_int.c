@@ -8,37 +8,40 @@
 int print_int(va_list args_list)
 {
 	int n = va_arg(args_list, int);
-	int char_cnt = 0;
-	int exp, num, digit;
+	int num, last = n % 10, digit, exp = 1;
+	int i = 1;
 
-	/* handle negative int arguments*/
-	if (n < 0)
+	n = n / 10;
+	num = n;
+
+	if (last < 0)
 	{
 		_putchar('-');
+		num = -num;
 		n = -n;
-		char_cnt++;
+		last = -last;
+		i++;
 	}
-
-	/* digit extraction*/
-	exp = 1;
-	num = n;
-
-	while (num / 10 != 0)
+	if (num > 0)
 	{
-		exp = exp * 10;
-		num = num / 10;
+		while (num / 10 != 0)
+		{
+			exp = exp * 10;
+			num = num / 10;
+		}
+		num = n;
+		while (exp > 0)
+		{
+			digit = num / exp;
+			_putchar(digit + '0');
+			num -= digit * exp;
+			exp = exp / 10;
+			i++;
+		}
 	}
-	num = n;
+	_putchar(last + '0');
 
-	while (exp > 0)
-	{
-		digit = num / exp;
-		_putchar(digit + '0');
-		num -= digit * exp;
-		exp = exp / 10;
-		char_cnt++;
-	}
-	return (char_cnt);
+	return (i);
 }
 
 /**
@@ -49,34 +52,38 @@ int print_int(va_list args_list)
 int print_d(va_list args_list)
 {
 	int n = va_arg(args_list, int);
-	int char_cnt = 0;
-	int exp, num, digit;
+	int num, last = n % 10, digit;
+	int i = 1;
+	int exp = 1;
 
-	/*handle negative int arguments*/
-	if (n < 0)
+	n = n / 10;
+	num = n;
+
+	if (last < 0)
 	{
 		_putchar('-');
+		num = -num;
 		n = -n;
-		char_cnt++;
+		last = -last;
+		i++;
 	}
-
-	/* digit extraction*/
-	exp = 1;
-	num = n;
-
-	while (num / 10 != 0)
+	if (num > 0)
 	{
-		exp = exp * 10;
-		num = num / 10;
-	}
-	num = n;
-	while (exp > 0)
-	{
-		digit = num / exp;
-		_putchar(digit + '0');
-		num -= digit * exp;
-		exp = exp / 10;
-		char_cnt++;
-	}
-	return (char_cnt);
+		while (num / 10 != 0)
+		{
+			exp = exp * 10;
+			num = num / 10;
+		}
+		num = n;
+		while (exp > 0)
+		{
+			digit = num / exp;
+			_putchar(digit + '0');
+			num -= digit * exp;
+			exp = exp / 10;
+			i++;
+		}
+		_putchar(last + '0');
+
+		return (i);
 }
